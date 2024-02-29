@@ -1,6 +1,5 @@
 #include "Engine.h"
 
-
 void Engine::start(sf::RenderWindow &window) {
     while (window.isOpen())
     {
@@ -17,5 +16,10 @@ void Engine::start(sf::RenderWindow &window) {
 
         window.display();
     }
+
+}
+
+
+Engine::Engine():gravity(0.0f, 9.8f),world(gravity) {
 
 }
