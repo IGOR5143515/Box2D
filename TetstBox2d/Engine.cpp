@@ -1,6 +1,7 @@
 #include "Engine.h"
 
 void Engine::start(sf::RenderWindow &window) {
+   
     while (window.isOpen())
     {
 
