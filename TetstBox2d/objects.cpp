@@ -1,19 +1,27 @@
 #include "objects.h"
 
+b2Body* objects::getBody() {
+	return body;
+}
 
-objects::objects(Type t,sf::Vector2f vec,b2World world) {
+sf::CircleShape& objects::getCircle() {
+	return shape;
+}
+
+objects::objects(sf::Vector2f vec,b2World &world){
+
 	
-	if (t == Type::STATIC) {
+	groundDef.type = b2_dynamicBody;
+	groundDef.position.Set(vec.x, vec.y);
+	body = world.CreateBody(&groundDef);
 
-		groundDef.position.Set(vec.x, vec.y);
-		body = world.CreateBody(&groundDef);
-		groundbox.SetAsBox(vec.x, vec.y);
-		body->CreateFixture(&groundbox, 0.0f);
-	}
+	groundbox.SetAsBox(1.0f, 1.0f);
 
-	if (t == Type::DYNAMIC) {
-
-	}
+	fixDef.shape = &groundbox;
+	fixDef.density = 1.0f;
+	fixDef.friction = 0.3f;
+	shape.setRadius(50);
+	body->CreateFixture(&fixDef);
 	
 
 }

@@ -4,17 +4,26 @@ void Engine::start(sf::RenderWindow &window) {
    
     while (window.isOpen())
     {
-
+        world.Step(1 / 60.f, 8, 3);
         sf::Event event;
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+                objects *x=new objects(sf::Vector2f(20, 1), world);
+                Buffer.push_back(x);
+                
+            }
+           
         }
-
-
+        
+        
+       
+      
         window.clear();
-
+        r.RenderAndMoving(Buffer, window);
         window.display();
     }
 

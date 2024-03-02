@@ -1,16 +1,23 @@
 #pragma once
+#include<iostream>
 #include"objects.h"
 #include<vector>
 #include <SFML/Graphics.hpp>
+#include"Render.h"
+
+
+
 class Engine{
 private:
-	const float SCALE = 30.f;
-	std::vector<objects>Buffer;
+
+	std::vector<objects*>Buffer;
 	b2Vec2 gravity;
 	b2World world;
+	Render r;
+	
 public:
 	Engine();
-
+	
 	void start(sf::RenderWindow&);
 
 

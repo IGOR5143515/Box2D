@@ -18,7 +18,10 @@ private:
 
 public:
 
-	objects(Type,sf::Vector2f,b2World);
+	objects(sf::Vector2f,b2World&);
+	b2Body* getBody();
+	sf::CircleShape& getCircle();
+	
 
 
 
