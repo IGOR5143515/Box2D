@@ -11,10 +11,10 @@ void Engine::start(sf::RenderWindow &window) {
             if (event.type == sf::Event::Closed)
                 window.close();
 
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-                objects *x=new objects(sf::Vector2f(20, 1), world);
+            if (event.type==sf::Event::KeyPressed)
+                if(event.key.code==sf::Keyboard::Q){
+                objects x(sf::Vector2f(20, 1), world);
                 Buffer.push_back(x);
-                
             }
            
         }

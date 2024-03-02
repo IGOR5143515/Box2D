@@ -10,7 +10,7 @@ private:
 
 public:
 
-	void RenderAndMoving(std::vector<objects*>&,sf::RenderWindow &);
+	void RenderAndMoving(std::vector<objects>&,sf::RenderWindow &);
 
 };
 
