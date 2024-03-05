@@ -6,6 +6,6 @@ private:
 	sf::Texture t;
 	sf::Sprite s;
 public:
-	SpriteManager(std::string);
+	SpriteManager(std::string&);
 	sf::Sprite& GetSprite() { return s; }
 };

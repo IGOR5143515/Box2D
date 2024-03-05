@@ -3,8 +3,6 @@
 #include <Box2D/Box2D.h>
 #include"SpriteManager.h"
 
-
-
 enum class Type {
 	STATIC,
 	DYNAMIC

@@ -11,7 +11,7 @@
 class Engine{
 private:
 	
-	std::vector<objects>Buffer;
+	std::vector<objects*>Buffer;
 	b2Vec2 gravity;
 	b2World world;
 	Render r;
