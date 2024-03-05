@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
+#include"SpriteManager.h"
+
 
 
 enum class Type {
@@ -10,6 +12,7 @@ enum class Type {
 
 class objects{
 private:
+	SpriteManager SM;
 	b2BodyDef groundDef;
 	b2Body* body;
 	b2PolygonShape groundbox;
@@ -18,9 +21,10 @@ private:
 
 public:
 
-	objects(sf::Vector2f,b2World&);
+	objects(Type,sf::Vector2f,b2World&,std::string);
 	b2Body* getBody();
-	sf::CircleShape& getCircle();
+	sf::Sprite& GetSprite() { return SM.GetSprite(); }
+
 	
 
 

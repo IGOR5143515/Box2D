@@ -4,24 +4,29 @@ b2Body* objects::getBody() {
 	return body;
 }
 
-sf::CircleShape& objects::getCircle() {
-	return shape;
-}
 
-objects::objects(sf::Vector2f vec,b2World &world){
 
+objects::objects(Type t,sf::Vector2f vec,
+	b2World &world,std::string str):SM(str){
 	
-	groundDef.type = b2_dynamicBody;
-	groundDef.position.Set(vec.x, vec.y);
-	body = world.CreateBody(&groundDef);
+	if (t == Type::DYNAMIC) {
+		groundDef.type = b2_dynamicBody;
+		groundDef.position.Set(vec.x, vec.y);
+		body = world.CreateBody(&groundDef);
 
-	groundbox.SetAsBox(1.0f, 1.0f);
+		groundbox.SetAsBox(1.5f, 1.5f);
 
-	fixDef.shape = &groundbox;
-	fixDef.density = 1.0f;
-	fixDef.friction = 0.3f;
-	shape.setRadius(50);
-	body->CreateFixture(&fixDef);
-	
+		fixDef.shape = &groundbox;
+		fixDef.density = 1.0f;
+		fixDef.friction = 0.3f;
+		body->CreateFixture(&fixDef);
+	}
+
+	if (t == Type::STATIC) {
+		groundDef.position.Set(vec.x, vec.y);
+		body = world.CreateBody(&groundDef);
+		groundbox.SetAsBox(1.5f, 1.5f);
+		body->CreateFixture(&groundbox, 0.0f);
+	}
 
 }

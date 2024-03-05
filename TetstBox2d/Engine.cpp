@@ -13,9 +13,16 @@ void Engine::start(sf::RenderWindow &window) {
 
             if (event.type==sf::Event::KeyPressed)
                 if(event.key.code==sf::Keyboard::Q){
-                objects x(sf::Vector2f(20, 1), world);
+                objects x(Type::DYNAMIC,sf::Vector2f(20, 1), world,
+                    "img/ball.png");
                 Buffer.push_back(x);
+               
             }
+            if (event.type == sf::Event::KeyPressed)
+                if (event.key.code == sf::Keyboard::W) {
+                    objects x(Type::STATIC, sf::Vector2f(20, 20), world, "img/ball");
+                    Buffer.push_back(x);
+                }
            
         }
         
