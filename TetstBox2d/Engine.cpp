@@ -1,7 +1,18 @@
 #include "Engine.h"
 
+void Console(Engine *e) {
+
+    while (true) {
+        std::cin >> e->GetString();
+    }
+
+}
+
 void Engine::start(sf::RenderWindow &window) {
-   
+    
+    std::thread tr(Console, this);//Вызов функции Console в отдельном потоке
+
+
     while (window.isOpen())
     {
         world.Step(1 / 60.f, 8, 3);
@@ -26,17 +37,34 @@ void Engine::start(sf::RenderWindow &window) {
            
         }
         
-        
        
+       deleteBuffer();// очищение буфера при определенном условии
       
         window.clear();
         r.RenderAndMoving(Buffer, window);
         window.display();
+
+     
     }
 
+    tr.join();
 }
 
 
 Engine::Engine():gravity(0.0f, 9.8f),world(gravity) {
+
+}
+
+void Engine::deleteBuffer() {
+
+    for (auto it = Buffer.begin(); it != Buffer.end();) {
+
+        if ((*it)->GetSprite().getPosition().y >400) {
+            it = Buffer.erase(it);
+        }
+        else
+            it++;
+        
+    }
 
 }

@@ -4,13 +4,11 @@
 #include<vector>
 #include <SFML/Graphics.hpp>
 #include"Render.h"
-
-
-
+#include<thread>
 
 class Engine{
 private:
-	
+	std::string BufferComand;
 	std::vector<objects*>Buffer;
 	b2Vec2 gravity;
 	b2World world;
@@ -18,9 +16,9 @@ private:
 	
 public:
 	Engine();
-	
 	void start(sf::RenderWindow&);
-
+	void deleteBuffer();
+	std::string& GetString() { return BufferComand; }
 
 };
 
