@@ -1,10 +1,34 @@
 #include "Engine.h"
 
-void Console(Engine *e) {
-
+void Console(Engine *e) {   //Обработка команд командной строки
+    std::string choose;
     while (true) {
         std::cin >> e->GetString();
+        if (e->BufferComand == "New") {
+            std::cout << "1- New dynamic obj" << std::endl;
+            std::cout << "1- New static obj" << std::endl;
+
+            std::cin >> choose;
+
+            if (choose == "1") {
+                objects* x = new objects(Type::DYNAMIC, sf::Vector2f(20, 1), e->world,
+                    "img/ball.png");
+                e->Buffer.push_back(x);
+
+            }
+            if (choose == "2") {
+                objects* x = new objects(Type::STATIC, sf::Vector2f(20, 20), e->world, "img/ball.png");
+                e->Buffer.push_back(x);
+               
+
+            }
+        }
+        if (e->BufferComand == "Help") {
+            std::cout << "New - Add new object to buffer" << std::endl;
+        }
+
     }
+    
 
 }
 
@@ -15,7 +39,11 @@ void Engine::start(sf::RenderWindow &window) {
 
     while (window.isOpen())
     {
-        world.Step(1 / 60.f, 8, 3);
+        cursor = sf::Mouse::getPosition(window);//считывание позиции курсора 
+
+       
+        world.Step(1 / 60.f, 8, 3);//Физики притяжения для Box2D
+
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -37,6 +65,10 @@ void Engine::start(sf::RenderWindow &window) {
            
         }
         
+     
+
+
+
        
        deleteBuffer();// очищение буфера при определенном условии
       

@@ -13,12 +13,15 @@ private:
 	b2Vec2 gravity;
 	b2World world;
 	Render r;
+	sf::Vector2i cursor;
 	
 public:
 	Engine();
+	friend void Console(Engine* e);
 	void start(sf::RenderWindow&);
 	void deleteBuffer();
 	std::string& GetString() { return BufferComand; }
+	void AddObject();
 
 };
 
