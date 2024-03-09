@@ -2,22 +2,24 @@
 
 void Console(Engine *e) {   //Обработка команд командной строки
     std::string choose;
+    std::string AdressOfSprite;
     while (true) {
         std::cin >> e->GetString();
         if (e->BufferComand == "New") {
             std::cout << "1- New dynamic obj" << std::endl;
-            std::cout << "1- New static obj" << std::endl;
+            std::cout << "2- New static obj" << std::endl;
 
             std::cin >> choose;
 
             if (choose == "1") {
+                std::cin >> AdressOfSprite;// ввод адреса спрайта
                 objects* x = new objects(Type::DYNAMIC, sf::Vector2f(20, 1), e->world,
-                    "img/ball.png");
+                    "img/"+AdressOfSprite);
                 e->Buffer.push_back(x);
 
             }
             if (choose == "2") {
-                objects* x = new objects(Type::STATIC, sf::Vector2f(20, 20), e->world, "img/ball.png");
+                objects* x = new objects(Type::STATIC, sf::Vector2f(1, 1), e->world, "img/ball.png");
                 e->Buffer.push_back(x);
                
 
@@ -32,15 +34,17 @@ void Console(Engine *e) {   //Обработка команд командной строки
 
 }
 
+
+
 void Engine::start(sf::RenderWindow &window) {
     
     std::thread tr(Console, this);//Вызов функции Console в отдельном потоке
-
+    sf::Vector2f pos;
 
     while (window.isOpen())
     {
         cursor = sf::Mouse::getPosition(window);//считывание позиции курсора 
-
+        pos= window.mapPixelToCoords(cursor);
        
         world.Step(1 / 60.f, 8, 3);//Физики притяжения для Box2D
 
@@ -65,12 +69,32 @@ void Engine::start(sf::RenderWindow &window) {
            
         }
         
-     
+        if (event.type == sf::Event::MouseButtonPressed)
+            if (event.key.code == sf::Mouse::Left) {
+                for (size_t i = 0; i < Buffer.size(); i++)
+                {
+                    if (Buffer[i]->GetSprite().getGlobalBounds().contains(cursor.x, cursor.y)) {
+                        copy = Buffer[i];
+                        action = true;
+                        //break;
+                    }
+                }
+               
+            }
 
 
+        if (event.type == sf::Event::MouseButtonReleased)
+            if (event.key.code == sf::Mouse::Left)
+                action = false;
+                
 
-       
-       deleteBuffer();// очищение буфера при определенном условии
+        if (action) {
+            FollowingCursor(copy, pos);
+        }
+
+        StartFunk();
+
+      
       
         window.clear();
         r.RenderAndMoving(Buffer, window);
@@ -82,6 +106,10 @@ void Engine::start(sf::RenderWindow &window) {
     tr.join();
 }
 
+void Engine::StartFunk() {
+   /* Тут будут инициализации всех функций*/
+    deleteBuffer();// очищение буфера при определенном условии
+}
 
 Engine::Engine():gravity(0.0f, 9.8f),world(gravity) {
 
@@ -91,12 +119,21 @@ void Engine::deleteBuffer() {
 
     for (auto it = Buffer.begin(); it != Buffer.end();) {
 
-        if ((*it)->GetSprite().getPosition().y >400) {
+        if ((*it)->GetSprite().getPosition().y >800) {
             it = Buffer.erase(it);
         }
         else
             it++;
         
     }
+
+}
+
+
+void Engine::FollowingCursor(objects * obj,sf::Vector2f vec) {
+
+  
+    b2Vec2 pos(vec.x/32, vec.y/32);
+    obj->getBody()->SetTransform(pos,obj->getBody()->GetAngle());
 
 }

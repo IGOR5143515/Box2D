@@ -18,7 +18,7 @@ private:
 	sf::CircleShape shape;
 
 public:
-
+	b2BodyDef& getBodyDef() { return groundDef; }
 	objects(Type,sf::Vector2f,b2World&,std::string);
 	b2Body* getBody();
 	sf::Sprite& GetSprite() { return SM.GetSprite(); }

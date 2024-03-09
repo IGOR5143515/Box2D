@@ -14,11 +14,11 @@ objects::objects(Type t,sf::Vector2f vec,
 		groundDef.position.Set(vec.x, vec.y);
 		body = world.CreateBody(&groundDef);
 
-		groundbox.SetAsBox(1.5f, 1.5f);
+		groundbox.SetAsBox(0.5f, 0.5f);
 
 		fixDef.shape = &groundbox;
-		fixDef.density = 1.0f;
-		fixDef.friction = 0.3f;
+		fixDef.density = 5.0f;				
+		fixDef.friction = 5.3f;
 		body->CreateFixture(&fixDef);
 	}
 
@@ -30,3 +30,5 @@ objects::objects(Type t,sf::Vector2f vec,
 	}
 
 }
+//fixDef.density = 1.0f;
+//fixDef.friction = 0.3f;

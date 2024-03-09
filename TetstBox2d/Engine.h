@@ -8,6 +8,8 @@
 
 class Engine{
 private:
+	objects* copy{};
+	bool action = false;
 	std::string BufferComand;
 	std::vector<objects*>Buffer;
 	b2Vec2 gravity;
@@ -22,6 +24,8 @@ public:
 	void deleteBuffer();
 	std::string& GetString() { return BufferComand; }
 	void AddObject();
+	void StartFunk();
+	void FollowingCursor(objects *,sf::Vector2f);
 
 };
 
