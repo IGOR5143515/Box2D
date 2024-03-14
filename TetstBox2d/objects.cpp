@@ -4,6 +4,12 @@ b2Body* objects::getBody() {
 	return body;
 }
 
+objects::objects(b2World& world, std::string str):SM(str) {
+	groundDef.position.Set(0,0);
+	body = world.CreateBody(&groundDef);
+	groundbox.SetAsBox(1.5f, 1.5f);
+	body->CreateFixture(&groundbox, 0.0f);
+}
 
 
 objects::objects(Type t,sf::Vector2f vec,
@@ -30,5 +36,22 @@ objects::objects(Type t,sf::Vector2f vec,
 	}
 
 }
-//fixDef.density = 1.0f;
-//fixDef.friction = 0.3f;
+
+void objects::serialize(std::ofstream& of) {
+	b2Vec2 pos = this->body->GetPosition();
+
+	of.write(reinterpret_cast<char*>(&pos), sizeof(b2Vec2));
+
+}
+
+void objects::deserialize(std::ifstream& ifs, b2World& world) {
+	
+	b2Vec2 pos;
+
+	ifs.read(reinterpret_cast<char*>(&pos), sizeof(b2Vec2));
+
+	groundDef.position = pos;
+	body = world.CreateBody(&groundDef);
+
+
+}

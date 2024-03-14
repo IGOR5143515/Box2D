@@ -5,9 +5,11 @@
 #include <SFML/Graphics.hpp>
 #include"Render.h"
 #include<thread>
+#include"Serialization.h"
 
 class Engine{
 private:
+	Serialization ser;
 	objects* copy{};
 	bool action = false;
 	std::string BufferComand;

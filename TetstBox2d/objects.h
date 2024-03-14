@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
 #include"SpriteManager.h"
+#include<fstream>
 
 enum class Type {
 	STATIC,
@@ -22,10 +23,11 @@ public:
 	objects(Type,sf::Vector2f,b2World&,std::string);
 	b2Body* getBody();
 	sf::Sprite& GetSprite() { return SM.GetSprite(); }
+	objects(b2World& world, std::string str);
+	objects(){}
 
-	
-
-
+	void serialize(std::ofstream&);
+	void deserialize(std::ifstream&,b2World&);
 
 };
 

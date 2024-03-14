@@ -63,9 +63,21 @@ void Engine::start(sf::RenderWindow &window) {
             }
             if (event.type == sf::Event::KeyPressed)
                 if (event.key.code == sf::Keyboard::W) {
-                    objects *x= new objects(Type::STATIC, sf::Vector2f(20, 20), world, "img/ball.png");
+                    objects *x= new objects(Type::STATIC, sf::Vector2f(20, 10), world, "img/ball.png");
                     Buffer.push_back(x);
                 }
+            
+            if (event.type == sf::Event::KeyPressed)
+                if (event.key.code == sf::Keyboard::R) {
+                   ser.WriteToFile(Buffer);
+                   std::cout << "Is saving";
+                }
+            if (event.type == sf::Event::KeyPressed)
+                if (event.key.code == sf::Keyboard::S) {
+                    ser.loadFile(Buffer,world);
+                    std::cout << "Is reading";
+                }
+            
            
         }
         
@@ -116,16 +128,20 @@ Engine::Engine():gravity(0.0f, 9.8f),world(gravity) {
 }
 
 void Engine::deleteBuffer() {
-
+    objects* ob;
     for (auto it = Buffer.begin(); it != Buffer.end();) {
 
-        if ((*it)->GetSprite().getPosition().y >800) {
+        if ((*it)->GetSprite().getPosition().y >900) {
+            ob = (*it);
             it = Buffer.erase(it);
+           delete ob;
+            
         }
         else
             it++;
         
     }
+
 
 }
 
@@ -133,7 +149,7 @@ void Engine::deleteBuffer() {
 void Engine::FollowingCursor(objects * obj,sf::Vector2f vec) {
 
   
-    b2Vec2 pos(vec.x/32, vec.y/32);
+    b2Vec2 pos(vec.x/32, vec.y/32);// превод в метры 
     obj->getBody()->SetTransform(pos,obj->getBody()->GetAngle());
 
 }

@@ -8,4 +8,5 @@ private:
 public:
 	SpriteManager(std::string&);
 	sf::Sprite& GetSprite() { return s; }
+	SpriteManager(){}
 };
