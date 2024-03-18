@@ -5,7 +5,7 @@ void Render::RenderAndMoving(std::vector<objects*>&arr,sf::RenderWindow &window)
 	for (size_t i = 0; i < arr.size(); i++)
 	{
 		b2Vec2 pos = arr[i]->getBody()->GetPosition();
-		arr[i]->GetSprite().setPosition(pos.x*30.f, pos.y * 30.f);
+		arr[i]->GetSprite().setPosition(pos.x*30.0f, pos.y * 30.0f);
 		
 	}
 

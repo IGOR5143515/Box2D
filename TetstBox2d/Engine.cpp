@@ -131,7 +131,7 @@ void Engine::deleteBuffer() {
     objects* ob;
     for (auto it = Buffer.begin(); it != Buffer.end();) {
 
-        if ((*it)->GetSprite().getPosition().y >900) {
+        if ((*it)->GetSprite().getPosition().y >800) {
             ob = (*it);
             it = Buffer.erase(it);
            delete ob;
