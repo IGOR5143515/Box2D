@@ -1,20 +1,17 @@
 #include "objects.h"
-
+#include<iostream>
 b2Body* objects::getBody() {
 	return body;
 }
 
-objects::objects(b2World& world, std::string str):SM(str) {
-	groundDef.position.Set(0,0);
-	body = world.CreateBody(&groundDef);
-	groundbox.SetAsBox(1.5f, 1.5f);
-	body->CreateFixture(&groundbox, 0.0f);
-}
+
 
 
 objects::objects(Type t,sf::Vector2f vec,
 	b2World &world,std::string str):SM(str){
 	
+	fileName = str;
+
 	if (t == Type::DYNAMIC) {
 		groundDef.type = b2_dynamicBody;
 		groundDef.position.Set(vec.x, vec.y);
@@ -38,28 +35,26 @@ objects::objects(Type t,sf::Vector2f vec,
 
 }
 
-void objects::serialize(std::ofstream& of,std::ofstream &ofType) {
+void objects::serialize(std::ofstream& ofs,std::ofstream &ofType,std::ofstream &ofsTexture) {
 	b2Vec2 pos = this->body->GetPosition();
-	of.write(reinterpret_cast<char*>(&pos), sizeof(b2Vec2));
+	ofs.write(reinterpret_cast<char*>(&pos), sizeof(b2Vec2)); //write position object
 
-	ofType.write(reinterpret_cast<char*>(&type), sizeof(Type));
 	
+	ofsTexture << fileName << std::endl;
 
+	ofType.write(reinterpret_cast<char*>(&type), sizeof(Type));  // write type object
+
+	
 }
 
-void objects::deserialize(std::ifstream& ifs, b2World& world) {
-	
+void objects::deserialize(std::ifstream& ifs, std::ifstream& ifsTexture, b2World& world) {
+
 	b2Vec2 pos;
 	ifs.read(reinterpret_cast<char*>(&pos), sizeof(b2Vec2));
-	
-
-	//groundDef.position = pos;
-	
 	body->SetTransform(pos,body->GetAngle());
-	
-	
 
 	
 	
-
+	
+	
 }

@@ -11,15 +11,18 @@ enum class Type {
 
 class objects{
 private:
+	
+	std::string fileName;
 	Type type;
 	SpriteManager SM;
 	b2BodyDef groundDef;
 	b2Body* body;
 	b2PolygonShape groundbox;
 	b2FixtureDef fixDef;
-	sf::CircleShape shape;
+	
 
 public:
+	
 	Type &getType() { return type; }
 	b2BodyDef& getBodyDef() { return groundDef; }
 	objects(Type,sf::Vector2f,b2World&,std::string);
@@ -28,8 +31,8 @@ public:
 	objects(b2World& world, std::string str);
 	objects(){}
 
-	void serialize(std::ofstream&,std::ofstream&);
-	void deserialize(std::ifstream&,b2World&);
+	void serialize(std::ofstream&,std::ofstream&, std::ofstream&);
+	void deserialize(std::ifstream&, std::ifstream& ,b2World&);
 
 };
 

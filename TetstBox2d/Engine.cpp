@@ -14,12 +14,13 @@ void Console(Engine *e) {   //Обработка команд командной строки
             if (choose == "1") {
                 std::cin >> AdressOfSprite;// ввод адреса спрайта
                 objects* x = new objects(Type::DYNAMIC, sf::Vector2f(20, 1), e->world,
-                    "img/"+AdressOfSprite);
+                    AdressOfSprite);
                 e->Buffer.push_back(x);
 
             }
             if (choose == "2") {
-                objects* x = new objects(Type::STATIC, sf::Vector2f(1, 1), e->world, "img/ball.png");
+                std::cin >> AdressOfSprite;
+                objects* x = new objects(Type::STATIC, sf::Vector2f(1, 1), e->world, AdressOfSprite);
                 e->Buffer.push_back(x);
                
 
