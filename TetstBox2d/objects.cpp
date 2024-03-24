@@ -54,7 +54,4 @@ void objects::deserialize(std::ifstream& ifs, std::ifstream& ifsTexture, b2World
 	body->SetTransform(pos,body->GetAngle());
 
 	
-	
-	
-	
 }

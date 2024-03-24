@@ -14,17 +14,29 @@ void Console(Engine *e) {   //Обработка команд командной строки
             if (choose == "1") {
                 std::cin >> AdressOfSprite;// ввод адреса спрайта
                 objects* x = new objects(Type::DYNAMIC, sf::Vector2f(20, 1), e->world,
-                    AdressOfSprite);
+                    "img/"+AdressOfSprite);
                 e->Buffer.push_back(x);
 
             }
             if (choose == "2") {
                 std::cin >> AdressOfSprite;
-                objects* x = new objects(Type::STATIC, sf::Vector2f(1, 1), e->world, AdressOfSprite);
+                objects* x = new objects(Type::STATIC, sf::Vector2f(1, 1), e->world, "img/" + AdressOfSprite);
                 e->Buffer.push_back(x);
                
 
             }
+        }
+        if (e->BufferComand == "Save") {
+
+            std::cout << "Enter a number of save file" << std::endl;
+            std::string a; std::cin >> a;
+            e->getSer().WriteToFile(e->Buffer, a);
+
+        }
+        if (e->BufferComand == "Load") {
+            std::cout << "Enter a number load file" << std::endl;
+            std::string a; std::cin >> a;
+            e->getSer().loadFile(e->Buffer,e->world, a);
         }
         if (e->BufferComand == "Help") {
             std::cout << "New - Add new object to buffer" << std::endl;
@@ -68,7 +80,7 @@ void Engine::start(sf::RenderWindow &window) {
                     Buffer.push_back(x);
                 }
             
-            if (event.type == sf::Event::KeyPressed)
+           /* if (event.type == sf::Event::KeyPressed)
                 if (event.key.code == sf::Keyboard::R) {
                    ser.WriteToFile(Buffer);
                    std::cout << "Is saving";
@@ -77,7 +89,7 @@ void Engine::start(sf::RenderWindow &window) {
                 if (event.key.code == sf::Keyboard::S) {
                     ser.loadFile(Buffer,world);
                     std::cout << "Is reading";
-                }
+                }*/
             
            
         }

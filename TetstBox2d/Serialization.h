@@ -8,8 +8,8 @@ private:
 	
 public:
 	sf::Vector2f vec;
-	void WriteToFile(std::vector<objects*>&);
-	void loadFile(std::vector<objects*>&,b2World&);
+	void WriteToFile(std::vector<objects*>&,std::string);
+	void loadFile(std::vector<objects*>&,b2World&,std::string);
 
 };
 

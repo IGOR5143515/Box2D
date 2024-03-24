@@ -20,8 +20,10 @@ private:
 	sf::Vector2i cursor;
 	
 public:
+	Serialization& getSer() { return ser; }
 	Engine();
-	friend void Console(Engine* e);
+	void levelManager(int);
+	friend void Console(Engine* );
 	void start(sf::RenderWindow&);
 	void deleteBuffer();
 	std::string& GetString() { return BufferComand; }
