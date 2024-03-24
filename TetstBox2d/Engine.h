@@ -22,7 +22,7 @@ private:
 public:
 	Serialization& getSer() { return ser; }
 	Engine();
-	void levelManager(int);
+	void levelManager(std::string);
 	friend void Console(Engine* );
 	void start(sf::RenderWindow&);
 	void deleteBuffer();
@@ -30,6 +30,6 @@ public:
 	void AddObject();
 	void StartFunk();
 	void FollowingCursor(objects *,sf::Vector2f);
-
+	~Engine();
 };
 

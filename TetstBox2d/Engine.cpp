@@ -53,7 +53,7 @@ void Engine::start(sf::RenderWindow &window) {
     
     std::thread tr(Console, this);//Вызов функции Console в отдельном потоке
     sf::Vector2f pos;
-
+    
     while (window.isOpen())
     {
         cursor = sf::Mouse::getPosition(window);//считывание позиции курсора 
@@ -80,16 +80,19 @@ void Engine::start(sf::RenderWindow &window) {
                     Buffer.push_back(x);
                 }
             
-           /* if (event.type == sf::Event::KeyPressed)
-                if (event.key.code == sf::Keyboard::R) {
-                   ser.WriteToFile(Buffer);
-                   std::cout << "Is saving";
-                }
             if (event.type == sf::Event::KeyPressed)
-                if (event.key.code == sf::Keyboard::S) {
-                    ser.loadFile(Buffer,world);
-                    std::cout << "Is reading";
-                }*/
+                if (event.key.code == sf::Keyboard::A) {
+                   
+                    levelManager("1");
+
+                }
+          
+            if (event.type == sf::Event::KeyPressed)
+                if (event.key.code == sf::Keyboard::Z) {
+
+                    levelManager("2");
+
+                }
             
            
         }
@@ -131,6 +134,23 @@ void Engine::start(sf::RenderWindow &window) {
     tr.join();
 }
 
+void Engine::levelManager(std::string num) {
+    std::vector<objects*>arr;
+
+    for (auto& obj : Buffer) {
+        delete obj;
+    }
+    Buffer.clear();
+  
+    
+    ser.loadFile(arr, world, num);
+    Buffer = arr;
+                                            //Delete buffer
+  
+    
+   
+}
+
 void Engine::StartFunk() {
    /* Тут будут инициализации всех функций*/
     deleteBuffer();// очищение буфера при определенном условии
@@ -165,4 +185,12 @@ void Engine::FollowingCursor(objects * obj,sf::Vector2f vec) {
     b2Vec2 pos(vec.x/32, vec.y/32);// превод в метры 
     obj->getBody()->SetTransform(pos,obj->getBody()->GetAngle());
 
+}
+Engine::~Engine() {
+
+    delete copy;
+    for (auto& obj : Buffer) {
+        delete obj;                     //?
+    }
+    Buffer.clear();
 }

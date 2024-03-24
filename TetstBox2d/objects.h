@@ -33,6 +33,6 @@ public:
 
 	void serialize(std::ofstream&,std::ofstream&, std::ofstream&);
 	void deserialize(std::ifstream&, std::ifstream& ,b2World&);
-
+	~objects();
 };
 

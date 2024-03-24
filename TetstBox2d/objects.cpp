@@ -55,3 +55,12 @@ void objects::deserialize(std::ifstream& ifs, std::ifstream& ifsTexture, b2World
 
 	
 }
+
+objects::~objects() {
+	
+	b2World *world = body->GetWorld();
+
+	world->DestroyBody(body);
+	body = nullptr;
+
+}
