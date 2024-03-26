@@ -6,7 +6,8 @@
 
 enum class Type {
 	STATIC,
-	DYNAMIC
+	DYNAMIC,
+	BACK_GROUND
 };
 
 class objects{
@@ -30,6 +31,7 @@ public:
 	sf::Sprite& GetSprite() { return SM.GetSprite(); }
 	objects(b2World& world, std::string str);
 	objects(){}
+	
 
 	void serialize(std::ofstream&,std::ofstream&, std::ofstream&);
 	void deserialize(std::ifstream&, std::ifstream& ,b2World&);

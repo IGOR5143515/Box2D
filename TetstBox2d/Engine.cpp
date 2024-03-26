@@ -9,6 +9,7 @@ void Console(Engine *e) {   //Обработка команд командной строки
         if (e->BufferComand == "New") {
             std::cout << "1- New dynamic obj" << std::endl;
             std::cout << "2- New static obj" << std::endl;
+            std::cout << "3- Back Ground" << std::endl;
 
             std::cin >> choose;
 
@@ -26,6 +27,7 @@ void Console(Engine *e) {   //Обработка команд командной строки
                
 
             }
+        
         }
         if (e->BufferComand == "Save") {
 
@@ -201,3 +203,5 @@ Engine::~Engine() {
     }
     Buffer.clear();
 }
+
+
