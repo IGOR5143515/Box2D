@@ -1,5 +1,6 @@
 #include "Serialization.h"
 
+
 void Serialization::WriteToFile(std::vector<objects*>&arr,std::string num){
 	std::ofstream ofs(num+"SaveFile.bin", std::ios::binary);
 	std::ofstream ofsType(num+"Type.bin", std::ios::binary);

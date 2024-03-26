@@ -9,6 +9,7 @@
 
 class Engine{
 private:
+	
 	Serialization ser;
 	objects* copy{};
 	bool action = false;

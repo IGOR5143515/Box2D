@@ -1,6 +1,3 @@
-img/ball.png
-img/ball.png
-img/ball.png
-img/ball.png
-img/ball.png
-img/ball.png
+img/BackGround.jpg
+img/b2.jpg
+img/shield.png

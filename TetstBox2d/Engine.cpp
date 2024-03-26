@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include <cstdlib>
 
 void Console(Engine *e) {   //Обработка команд командной строки
     std::string choose;
@@ -53,7 +54,7 @@ void Engine::start(sf::RenderWindow &window) {
     
     std::thread tr(Console, this);//Вызов функции Console в отдельном потоке
     sf::Vector2f pos;
-    
+
     while (window.isOpen())
     {
         cursor = sf::Mouse::getPosition(window);//считывание позиции курсора 
@@ -94,6 +95,12 @@ void Engine::start(sf::RenderWindow &window) {
 
                 }
             
+          /*  if (event.type == sf::Event::KeyPressed)
+                if (event.key.code == sf::Keyboard::T) {
+
+                    system("C:/Users/IGOR/source/repos/TetstBox2d/x64/Debug/TetstBox2d.exe");
+
+                }*/
            
         }
         
