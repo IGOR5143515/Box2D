@@ -13,11 +13,12 @@ objects::objects(Type t,sf::Vector2f vec,
 	fileName = str;
 
 	if (t == Type::DYNAMIC) {
+		SM.GetSprite().setOrigin(SM.GetSprite().getGlobalBounds().width / 2, SM.GetSprite().getGlobalBounds().height / 2);
 		groundDef.type = b2_dynamicBody;
 		groundDef.position.Set(vec.x, vec.y);
 		body = world.CreateBody(&groundDef);
 		type = Type::DYNAMIC;
-		groundbox.SetAsBox(0.5f, 0.5f);
+		groundbox.SetAsBox(SM.GetSprite().getGlobalBounds().width / 60, SM.GetSprite().getGlobalBounds().height / 60);
 
 		fixDef.shape = &groundbox;
 		fixDef.density = 5.0f;				
