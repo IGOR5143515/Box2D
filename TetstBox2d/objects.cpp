@@ -26,12 +26,26 @@ objects::objects(Type t,sf::Vector2f vec,
 	}
 
 	if (t == Type::STATIC) {
+	
+
+		SM.GetSprite().setOrigin(SM.GetSprite().getGlobalBounds().width/2, SM.GetSprite().getGlobalBounds().height / 2);
+
+
 		groundDef.position.Set(vec.x, vec.y);
-		body = world.CreateBody(&groundDef);
-		groundbox.SetAsBox(1.5f, 1.5f);
+		body = world.CreateBody(&groundDef);	
+		groundbox.SetAsBox(SM.GetSprite().getGlobalBounds().width/60,SM.GetSprite().getGlobalBounds().height/60);
 		body->CreateFixture(&groundbox, 0.0f);
 		type = Type::STATIC;
 	}
+
+	if (t == Type::BACK_GROUND) {
+		groundDef.position.Set(vec.x, vec.y);
+		body = world.CreateBody(&groundDef);
+		groundbox.SetAsBox(1.5f, 1.5f);
+	
+		type = Type::STATIC;
+	}
+
 
 }
 

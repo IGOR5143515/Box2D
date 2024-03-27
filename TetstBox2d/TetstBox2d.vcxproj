@@ -133,7 +133,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="objects.cpp" />
     <ClCompile Include="Render.cpp" />
@@ -142,7 +141,6 @@
     <ClCompile Include="TetstBox2d.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BackGround.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="objects.h" />
     <ClInclude Include="Render.h" />

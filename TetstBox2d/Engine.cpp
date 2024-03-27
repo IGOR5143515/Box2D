@@ -15,16 +15,22 @@ void Console(Engine *e) {   //Обработка команд командной строки
 
             if (choose == "1") {
                 std::cin >> AdressOfSprite;// ввод адреса спрайта
-                objects* x = new objects(Type::DYNAMIC, sf::Vector2f(20, 1), e->world,
+                objects* x = new objects(Type::DYNAMIC, sf::Vector2f(20, 10), e->world,
                     "img/"+AdressOfSprite);
                 e->Buffer.push_back(x);
 
             }
             if (choose == "2") {
                 std::cin >> AdressOfSprite;
-                objects* x = new objects(Type::STATIC, sf::Vector2f(1, 1), e->world, "img/" + AdressOfSprite);
+                objects* x = new objects(Type::STATIC, sf::Vector2f(20, 10), e->world, "img/" + AdressOfSprite);
                 e->Buffer.push_back(x);
                
+
+            }
+            if (choose == "3") {
+                std::cin >> AdressOfSprite;
+                objects* x = new objects(Type::BACK_GROUND, sf::Vector2f(20, 10), e->world, "img/" + AdressOfSprite);
+                e->Buffer.push_back(x);
 
             }
         
