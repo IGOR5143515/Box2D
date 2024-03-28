@@ -7,7 +7,8 @@
 enum class Type {
 	STATIC,
 	DYNAMIC,
-	BACK_GROUND
+	BACK_GROUND,
+	HERO
 };
 
 class objects{
@@ -24,6 +25,7 @@ private:
 
 public:
 	
+	std::string status = "Nan";
 	Type &getType() { return type; }
 	b2BodyDef& getBodyDef() { return groundDef; }
 	objects(Type,sf::Vector2f,b2World&,std::string);

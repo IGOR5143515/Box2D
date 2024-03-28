@@ -47,6 +47,22 @@ objects::objects(Type t,sf::Vector2f vec,
 		type = Type::STATIC;
 	}
 
+	if (t == Type::HERO) {
+		groundDef.type = b2_dynamicBody;
+		groundDef.position.Set(vec.x, vec.y);
+		body = world.CreateBody(&groundDef);
+		b2CircleShape circleShape;
+		circleShape.m_radius = 1.5; // Установите радиус круглого тела
+
+		b2FixtureDef fixtureDef;
+		fixtureDef.shape = &circleShape;
+		//fixtureDef.density =0.1f; // Установите плотность круглого тела
+		fixtureDef.friction = 0.1f; // Установите коэффициент трения круглого тела
+		fixtureDef.restitution = 0.5; // Установите коэффициент упругости круглого тела
+
+		body->CreateFixture(&fixtureDef);
+	}
+
 
 }
 

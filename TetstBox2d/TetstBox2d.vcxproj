@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="Hero.cpp" />
     <ClCompile Include="objects.cpp" />
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="Serialization.cpp" />
@@ -142,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h" />
+    <ClInclude Include="Hero.h" />
     <ClInclude Include="objects.h" />
     <ClInclude Include="Render.h" />
     <ClInclude Include="Serialization.h" />

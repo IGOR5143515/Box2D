@@ -59,7 +59,8 @@ void Console(Engine *e) {   //Обработка команд командной строки
 
 
 void Engine::start(sf::RenderWindow &window) {
-    
+
+
     std::thread tr(Console, this);//Вызов функции Console в отдельном потоке
     sf::Vector2f pos;
 
@@ -68,7 +69,7 @@ void Engine::start(sf::RenderWindow &window) {
         cursor = sf::Mouse::getPosition(window);//считывание позиции курсора 
         pos= window.mapPixelToCoords(cursor);
        
-        world.Step(1 / 60.f, 8, 3);//Физики притяжения для Box2D
+        world.Step(2 / 60.f, 8, 3);//Физики притяжения для Box2D
 
         sf::Event event;
         while (window.pollEvent(event))
@@ -83,18 +84,14 @@ void Engine::start(sf::RenderWindow &window) {
                 Buffer.push_back(x);
                
             }
-            if (event.type == sf::Event::KeyPressed)
-                if (event.key.code == sf::Keyboard::W) {
-                    objects *x= new objects(Type::STATIC, sf::Vector2f(20, 10), world, "img/ball.png");
-                    Buffer.push_back(x);
-                }
+           
             
-            if (event.type == sf::Event::KeyPressed)
+           /* if (event.type == sf::Event::KeyPressed)
                 if (event.key.code == sf::Keyboard::A) {
                    
                     levelManager("1");
 
-                }
+                }*/
           
             if (event.type == sf::Event::KeyPressed)
                 if (event.key.code == sf::Keyboard::Z) {
@@ -103,14 +100,20 @@ void Engine::start(sf::RenderWindow &window) {
 
                 }
             
-          /*  if (event.type == sf::Event::KeyPressed)
-                if (event.key.code == sf::Keyboard::T) {
-
-                    system("C:/Users/IGOR/source/repos/TetstBox2d/x64/Debug/TetstBox2d.exe");
-
-                }*/
+         
            
         }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            h->getBody()->ApplyLinearImpulseToCenter(b2Vec2(0.25, 0), true);
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+            h->getBody()->ApplyLinearImpulseToCenter(b2Vec2(-0.25, 0), true);
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+            h->getBody()->SetLinearVelocity(b2Vec2(0, -10));
+
+      
+
         
         if (event.type == sf::Event::MouseButtonPressed)
             if (event.key.code == sf::Mouse::Left) {
@@ -135,24 +138,29 @@ void Engine::start(sf::RenderWindow &window) {
             FollowingCursor(copy, pos);
         }
 
-        StartFunk();
+        
 
       
       
         window.clear();
         r.RenderAndMoving(Buffer, window);
         window.display();
-
+        deleteBuffer();// очищение буфера при определенном условии
      
     }
-
+    
     tr.join();
+   
 }
 
 void Engine::levelManager(std::string num) {
     std::vector<objects*>arr;
+    arr.push_back(h);
 
     for (auto& obj : Buffer) {
+        if (obj->status == "Hero")
+            continue;
+
         delete obj;
     }
     Buffer.clear();
@@ -168,11 +176,18 @@ void Engine::levelManager(std::string num) {
 
 void Engine::StartFunk() {
    /* Тут будут инициализации всех функций*/
-    deleteBuffer();// очищение буфера при определенном условии
+  
+    
+    
 }
 
-Engine::Engine():gravity(0.0f, 9.8f),world(gravity) {
-
+Engine::Engine() :gravity(0.0f, 9.8f), world(gravity) {
+    StartFunk();
+    h= new Hero(Type::HERO, sf::Vector2f(20, 10), world, "img/ball.png");//Hero
+    h->status = "Hero";
+ 
+   
+    Buffer.push_back(h);
 }
 
 void Engine::deleteBuffer() {
@@ -205,7 +220,7 @@ Engine::~Engine() {
 
     delete copy;
     for (auto& obj : Buffer) {
-        delete obj;                     //?
+        delete obj;                    
     }
     Buffer.clear();
 }

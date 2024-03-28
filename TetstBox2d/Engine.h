@@ -6,11 +6,12 @@
 #include"Render.h"
 #include<thread>
 #include"Serialization.h"
+#include"Hero.h"
 
 
 class Engine{
 private:
-	
+	Hero* h;
 	Serialization ser;
 	objects* copy{};
 	bool action = false;
